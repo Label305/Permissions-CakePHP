@@ -1,4 +1,4 @@
-# Permissions Component
+# Permissions Component [![Build Status](https://travis-ci.org/Label305/CakePHP-Permissions-Component.svg?branch=master)](https://travis-ci.org/Label305/CakePHP-Permissions-Component)
 
 Eases up fetching CRUD permissions from models.
 
