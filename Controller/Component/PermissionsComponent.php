@@ -2,8 +2,16 @@
 App::uses('Component', 'Controller');
 /**
  * Permissions component, will enabled you to implement CRUD methods on model level
- *
  * 
+ * @author Joris Blaak <joris@label305.com>
+ * @requires CakePHP 2.x
+ *
+ * Copyright (c) 2013 Label305. All Rights Reserved.
+ *
+ * THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
+ * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ * PARTICULAR PURPOSE.
  */
 class PermissionsComponent extends Component {
 
