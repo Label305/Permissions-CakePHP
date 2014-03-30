@@ -3,7 +3,7 @@
  * AccountFixture
  *
  */
-class AccountFixture extends CakeTestFixture {
+class PermAccountFixture extends CakeTestFixture {
 
 /**
  * Schema

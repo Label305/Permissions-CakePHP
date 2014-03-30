@@ -1,13 +1,28 @@
 <?php
 App::uses('Controller', 'Controller');
+App::uses('Model', 'Model');
 App::uses('CakeRequest', 'Network');
 App::uses('CakeResponse', 'Network');
 App::uses('ComponentCollection', 'Controller');
-App::uses('PermissionsComponent', 'Controller/Component');
+App::uses('PermissionsComponent', 'PermissionsComponent.Controller/Component');
 App::uses('AuthComponent', 'Controller/Component');
 
 //Dummy model
 class PermAccount extends Model {
+
+    public function canCreate($options) {
+        $result = false;
+        
+        switch($options['PermissibleModel']) {
+            case 'PermAccount':
+                //For testing purposes allow only ID 1 to create
+                if(isset($options['PermissibleId']) && $options['PermissibleId'] == 1) {
+                    $result = true;
+                }
+            break; 
+        }
+        return $result;
+    }
 
 }
 
@@ -26,7 +41,7 @@ class TestPermissionsController extends Controller {
         );
 }
 
-class PermissionsComponentTest extends AppComponentTest {
+class PermissionsComponentTest extends CakeTestCase {
     public $PermissionsComponent = null;
     public $Controller = null;
 
@@ -131,22 +146,6 @@ class PermissionsComponentTest extends AppComponentTest {
         $this->assertEquals($result, $expected, 'Unexpected result from not-logged in normalization');
     }
 
-    public function testIsPermAccount() {
-        //This is an PermAccount
-        $this->Controller->Auth->logout();
-        $this->Controller->Auth->login(array(
-            'id' => 1
-            ));
-        $this->assertTrue($this->PermissionsComponent->isPermAccount(), 'Should be an PermAccount');
-
-        //This is not an PermAccount
-        $this->Controller->Auth->logout();
-        $this->Controller->Auth->login(array(
-            'id' => 2
-            ));
-        $this->assertFalse($this->PermissionsComponent->isPermAccount(), 'Should not be an PermAccount');
-    }
-
     public function testGetRights() {
         //Might still be logged in as an adin
         $this->Controller->Auth->logout();
@@ -166,8 +165,8 @@ class PermissionsComponentTest extends AppComponentTest {
         $this->Controller->Auth->login(array(
             'id' => 1
             ));
-        $result = $this->PermissionsComponent->_getRights('canCreate', 'FooBar');
-        $this->assertTrue($result, 'Invalid rights for canCreate on virtual model');
+        $result = $this->PermissionsComponent->_getRights('canCreate', 'PermAccount');
+        $this->assertTrue($result, 'Invalid rights for canCreate on PermAccount');
     }
 
     public function tearDown() {

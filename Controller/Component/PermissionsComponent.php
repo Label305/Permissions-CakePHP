@@ -117,7 +117,7 @@ class PermissionsComponent extends Component {
 	 */
 	public function isAdmin() {
 		if(!method_exists($this->controller->{$this->settings['accountModel']}, 'isAdmin')) {
-			throw new InternalErrorException('No isAdmin function defined');
+			return false;
 		}
 
 		return $this->controller->Auth->loggedIn() && $this->controller->{$this->settings['accountModel']}->isAdmin($this->getPermissibleId());
