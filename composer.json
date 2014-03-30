@@ -1,0 +1,24 @@
+{
+    "name": "label305/permissions-component",
+    "version": "1.0.0",
+    "description": "Permissions component",
+    "type": "cakephp-plugin",
+    "homepage": "http://www.label305.com",
+    "keywords": [
+        "cakephp", 
+        "component", 
+        "permissions",
+        "crud"
+        ],
+    "authors": [
+        {
+            "name": "Joris Blaak",
+            "role": "Developer",
+            "email": "joris@label305.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "composer/installers": "*"
+    }
+}
