@@ -6,7 +6,7 @@ Eases up fetching CRUD permissions from models.
 
 Add the repository to your requirements and load using composer
 
-```
+```php
     "require": {
         "label305/permissions-component": "dev-master"
     }
@@ -14,7 +14,7 @@ Add the repository to your requirements and load using composer
 
 Add to your app's components
 
-```
+```php
 public $components = array(
 	'PermissionsComponent.Permissions'
 );
@@ -24,7 +24,7 @@ public $components = array(
 
 Setup authentication using the Auth component and define a user model
 
-```
+```php
 public $components = array(
     'Auth' => array(
         'authenticate' => array(
@@ -40,7 +40,7 @@ After that the Permissions component will use the YourUserModel as the Permissib
 
 For example:
 
-```
+```php
 public function canUpdate($options) {
     $result = false;
     
