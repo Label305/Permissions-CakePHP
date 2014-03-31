@@ -41,14 +41,14 @@ After that the Permissions component will use the YourUserModel as the Permissib
 For example:
 
 ```
-public function canCreate($options) {
+public function canUpdate($options) {
     $result = false;
     
     switch($options['PermissibleModel']) {
         case 'PermAccount':
-            //For testing purposes allow only ID 1 to create
-            if(isset($options['PermissibleId']) && $options['PermissibleId'] == 1) {
-                $result = true;
+            if(isset($options['PermissibleId'], $options['id'])) {
+				$this->id = $options['id'];
+                $result = $this->field('perm_account_id') == $options['PermissibleId'];
             }
         break; 
     }
@@ -56,7 +56,7 @@ public function canCreate($options) {
 }
 ```
 
-Will result that the user logged in with id 1 to have access to this model, it is possible to do authentication with multiple models, when, for example, you also want to define permissions to something like an api key. You only need to change the userModel used by the Authentication component
+This will check if the requested item with ```$options['id']``` has the ```perm_account_id``` matching to the logged in user. It is possible to do authentication with multiple models, when, for example, you also want to define permissions to something like an api key. You only need to change the userModel used by the Authentication component
 
 ## Admin users
 
