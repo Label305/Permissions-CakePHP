@@ -137,7 +137,7 @@ class PermissionsComponent extends Component {
 	 * @param  Array  $options   (optional) extra options
 	 * @return Boolean
 	 */
-	public function canRead($modelName, $options = array(){
+	public function canRead($modelName, $options = array()) {
 		return $this->_getRights('canRead', $modelName, $options);
 	}
 
