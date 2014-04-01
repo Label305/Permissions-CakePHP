@@ -52,6 +52,15 @@ class PermissionsComponent extends Component {
 	}
 
 	/**
+	 * Initialize with controller
+	 * @param  Controller $controller 
+	 * @return void
+	 */
+	public function initialize(Controller $controller) {
+		$this->controller = $controller;
+	}
+
+	/**
 	 * Set the model that needs rights
 	 * @param String $modelName 
 	 */
