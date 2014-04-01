@@ -14,8 +14,8 @@ before_script:
 script:
 - ../travis/script.sh
 after_success:
-- sudo wget http://phpdoc.org/phpDocumentor.phar
-- sudo php phpDocumentor.phar --directory="Controller"
+- wget http://phpdoc.org/phpDocumentor.phar
+- php phpDocumentor.phar --directory="Controller"
 - sudo apt-get install ncftp
 - ncftpput -R -m -u $FTP_USER -p $FTP_PASSWORD host3.label305.com /cakephp-permissions-component/$TRAVIS_BRANCH output/*
 - ../travis/after_success.sh
