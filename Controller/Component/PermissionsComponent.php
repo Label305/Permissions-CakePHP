@@ -17,7 +17,7 @@ class PermissionsComponent extends Component {
 
 	/**
 	 * Model which has the current entity who needs rights
-	 * @var string
+	 * @var String
 	 */
 	private $permissibleModel = null;
 
@@ -41,6 +41,7 @@ class PermissionsComponent extends Component {
 	/**
 	 * Merge passed settings
 	 * @param ComponentCollection $collection 
+	 * @param Array $settings 
 	 * @param array               $settings   
 	 */
 	public function __construct(ComponentCollection $collection, $settings = array()) {
@@ -51,14 +52,12 @@ class PermissionsComponent extends Component {
 	}
 
 	/**
-	 * Standard CakePHP callback 
-	 * 
-	 * @param  Controller $controller controller from which this function is called	 
+	 * Initialize with controller
+	 * @param  Controller $controller 
+	 * @return void
 	 */
-	public function initialize(Controller $controller, $settings = array()) {
+	public function initialize(Controller $controller) {
 		$this->controller = $controller;
-
-		$this->controller->loadModel($this->settings['accountModel']);
 	}
 
 	/**
@@ -121,7 +120,7 @@ class PermissionsComponent extends Component {
 	 *
 	 * @todo  write test
 	 * @todo  implement
-	 * @return boolean
+	 * @return Boolean
 	 */
 	public function isAdmin() {
 		if(!method_exists($this->controller->{$this->settings['accountModel']}, 'isAdmin')) {
@@ -133,44 +132,52 @@ class PermissionsComponent extends Component {
 
 	/**
 	 * The "C" in CRUD, checks if for rights
-	 * @return boolean
+	 * @param  String $modelName name of the model to have rights over
+	 * @param  Array  $options   (optional) extra options
+	 * @return Boolean
 	 */
-	public function canCreate($modelName, $options = null) {
+	public function canCreate($modelName, $options = array()) {
 		return $this->_getRights('canCreate', $modelName, $options);
 	}
 
 	/**
 	 * The "R" in CRUD, checks if for rights
-	 * @return boolean
+	 * @param  String $modelName name of the model to have rights over
+	 * @param  Array  $options   (optional) extra options
+	 * @return Boolean
 	 */
-	public function canRead($modelName, $options = null) {
+	public function canRead($modelName, $options = array()) {
 		return $this->_getRights('canRead', $modelName, $options);
 	}
 
 	/**
 	 * The "U" in CRUD, checks if for rights
-	 * @return boolean
+	 * @param  String $modelName name of the model to have rights over
+	 * @param  Array  $options   (optional) extra options
+	 * @return Boolean
 	 */
-	public function canUpdate($modelName, $options = null) {
+	public function canUpdate($modelName, $options = array()) {
 		return $this->_getRights('canUpdate', $modelName, $options);
 	}
 
 	/**
 	 * The "D" in CRUD, checks if for rights
-	 * @return boolean
+	 * @param  String $modelName name of the model to have rights over
+	 * @param  Array  $options   (optional) extra options
+	 * @return Boolean
 	 */
-	public function canDelete($modelName, $options = null) {
+	public function canDelete($modelName, $options = array()) {
 		return $this->_getRights('canDelete', $modelName, $options);
 	}
 
 	/**
 	 * Get the rights from the model
-	 * @param  String $modelName 
-	 * @param  array $options   
-	 * @param  String $action    e.g. canUpdate (or another method)
-	 * @return boolean
+	 * @param  String $action     the CRUD method, e.g. canCreate
+	 * @param  String $modelName  name of the model
+	 * @param  String $options    (optional) extra options
+	 * @return Boolean
 	 */
-	public function _getRights($action, $modelName, $options = null) {
+	public function _getRights($action, $modelName, $options = array()) {
 		if($this->isAdmin()) {
 			return true;
 		}
@@ -191,8 +198,8 @@ class PermissionsComponent extends Component {
 
 	/**
 	 * Normalizes the options
-	 * @param  mixed $options 
-	 * @return array
+	 * @param  Mixed $options 
+	 * @return Array
 	 */
 	public function _normalizeOptions($options) {
 		if(is_numeric($options)) {
