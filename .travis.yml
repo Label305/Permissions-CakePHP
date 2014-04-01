@@ -9,15 +9,6 @@ env:
     - REQUIRE="cakephp/debug_kit:2.2.* cakedc/search:dev-develop"
     - DB=mysql CAKE_VERSION=2.4
 
-  matrix:
-    - DB=mysql CAKE_VERSION=2.4
-
-matrix:
-  include:
-    - php: 5.4
-      env:
-        - COVERALLS=1
-
 before_script:
   - git clone https://github.com/FriendsOfCake/travis.git --depth 1 ../travis
   - ../travis/before_script.sh
