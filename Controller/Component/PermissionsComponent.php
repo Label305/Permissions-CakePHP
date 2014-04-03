@@ -123,11 +123,12 @@ class PermissionsComponent extends Component {
 	 * @return Boolean
 	 */
 	public function isAdmin() {
-		if(!method_exists($this->controller->{$this->settings['accountModel']}, 'isAdmin')) {
+		$model = ClassRegistry::init($this->settings['accountModel']);
+		if(!method_exists($model, 'isAdmin')) {
 			return false;
 		}
 
-		return $this->controller->Auth->loggedIn() && $this->controller->{$this->settings['accountModel']}->isAdmin($this->getPermissibleId());
+		return $this->controller->Auth->loggedIn() && $model->isAdmin($this->getPermissibleId());
 	}
 
 	/**
