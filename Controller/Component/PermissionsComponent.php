@@ -187,14 +187,22 @@ class PermissionsComponent extends Component {
 		$options = $this->_normalizeOptions($options);
 
 		//Make sure the model is present
-		$this->controller->loadModel($modelName);
+        App::uses($modelName, 'Model');
+        
+        //When class does not exists
+        if(!class_exists($modelName)) {
+            return false;
+        }
+        
+        //Do model instantiation ourselves to prevent Cake inflecting another one
+        $model  = new $modelName;
 
 		//Check if we can call the method on the model
-		if(!is_callable(array(get_class($this->controller->{$modelName}), $action))) {
+		if(!is_callable(array(get_class($model), $action))) {
 			return false;
 		}
 		
-		return $this->controller->{$modelName}->{$action}($options);
+		return $model->{$action}($options);
 	}
 
 	/**
