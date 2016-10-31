@@ -2,6 +2,10 @@
 
 Eases up fetching CRUD permissions from models.
 
+__No maintenance intended__
+
+This project is no longer actively maintained. It does its job, but there are no plans to extend or change it.
+
 ## Install
 
 Add the repository to your requirements and load using composer
